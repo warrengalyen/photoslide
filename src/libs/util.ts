@@ -15,3 +15,4 @@ export function changeScreenMode(theme: string): void
   const $html = document.querySelector('html') as HTMLElement;
   $html.dataset['color-mode'] = theme;
 }
+
