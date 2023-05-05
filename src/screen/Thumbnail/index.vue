@@ -1,5 +1,5 @@
 <template>
-  <p>
+  <div class="slideshow-thumbnail">
     <b>thumbnail component</b>
-  </p>
+  </div>
 </template>
