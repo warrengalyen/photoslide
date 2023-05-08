@@ -29,6 +29,7 @@ export default defineComponent({
     async function refresh()
     {
       state.loading = true;
+      // TODO: I arbitrarily delayed it by 3 seconds, but I need to find a reasonable delay time.
       await util.sleep(3000);
       state.loading = false;
     }
