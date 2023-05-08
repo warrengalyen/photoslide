@@ -51,10 +51,10 @@
   </nav>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, reactive } from 'vue';
 import { useStore } from 'vuex';
-import Icon from '~/components/Icon/index.vue';
+import Icon from '~/components/Icon';
 export default defineComponent({
   name: 'Navigation',
   components: {
@@ -68,12 +68,12 @@ export default defineComponent({
       activeMenu: false,
     });
     // methods
-    function onClickThumbnailButton(): void
+    function onClickThumbnailButton()
     {
       state.activeThumbnail = !state.activeThumbnail;
       store.dispatch('changeMode', !state.activeThumbnail ? null : 'thumbnail');
     }
-    function onClickMenuButton(e: PointerEvent): void
+    function onClickMenuButton(e)
     {
       e.stopPropagation();
       if (state.activeMenu)
@@ -86,12 +86,12 @@ export default defineComponent({
         switchActiveMenu(true);
       }
     }
-    function switchActiveMenu(sw: boolean): void
+    function switchActiveMenu(sw)
     {
       state.activeMenu = sw;
       if (!sw) window.off('click.navigationMenu');
     }
-    function onClickContextItem(key: string): void
+    function onClickContextItem(key)
     {
       switch (key)
       {
