@@ -3,12 +3,11 @@
   <Container v-else/>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, reactive, onMounted } from 'vue';
-import { useStore } from 'vuex';
 import * as util from '~/libs/util';
-import Container from '~/screen/Container/index.vue';
-import LoadingIntro from '~/components/Loading/Intro.vue';
+import Container from '~/screen/Container';
+import LoadingIntro from '~/components/Loading/Intro';
 export default defineComponent({
   name: 'App',
   components: {
@@ -17,7 +16,6 @@ export default defineComponent({
   },
   setup()
   {
-    const store = useStore();
     let state = reactive({
       loading: true,
       dev: process.env.NODE_ENV === 'development',
@@ -28,6 +26,13 @@ export default defineComponent({
       // TODO: Dark mode related part work
       console.log('update theme');
     }
+    async function refresh()
+    {
+      state.loading = true;
+      await util.sleep(3000);
+      state.loading = false;
+    }
+
     // watch
     // watch(() => store.state.preference.theme, updateTheme);
     // lifecycles
@@ -39,6 +44,7 @@ export default defineComponent({
     });
     return {
       state,
+      refresh,
     };
   }
 });
