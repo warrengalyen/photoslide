@@ -10,6 +10,9 @@
     right: 16px;
     bottom: 10px;
   }
+  &.swipe-move {
+    cursor: grabbing;
+  }
   @include responsive(desktop) {
     &__caption {
       display: block;
@@ -25,13 +28,3 @@
   }
 }
 
-// TODO: to be deleted later
-.log {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  background: lime;
-  margin: 0;
-  padding: 8px 16px;
-  font-size: 12px;
-}
