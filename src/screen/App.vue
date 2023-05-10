@@ -25,10 +25,21 @@ export default defineComponent({
     });
 
     // method
-    function updateTheme()
+    function updateTheme(color)
     {
-      // TODO: dark mode related part work
-      console.log('update theme');
+      let theme;
+      switch(color)
+      {
+        case 'light':
+        case 'dark':
+          theme = color;
+          break;
+        default:
+          theme = 'system';
+          break;
+      }
+      const $html = document.querySelector('html');
+      $html.dataset['color'] = theme;
     }
     function start()
     {
@@ -47,15 +58,16 @@ export default defineComponent({
     }
 
     // watch
-    // watch(() => store.state.preference, () => {
-    //   console.log('updated preference');
-    // });
+    watch(() => store.state.preference, () => {
+      console.log('updated preferences');
+    });
 
     // lifecycles
     onMounted(async () => {
       await util.sleep(500);
       // TODO: restore the values from storage to the vuex area
       // TODO: Otherwise, json values in the server are retrieved and restored to the vuex area.
+      updateTheme(store.state.preference.general.screenColor);
       state.loading = false;
     });
 

@@ -23,18 +23,6 @@ export function convertPureObject(src)
 }
 
 /**
- * change screen mode
- *
- * @param {String} theme
- */
-export function changeScreenMode(theme)
-{
-  if (!theme) return;
-  const $html = document.querySelector('html');
-  $html.dataset['color-mode'] = theme;
-}
-
-/**
  * initial custom event
  * It is used when creating and using custom events to create events with unique names when you want to insert multiple
  * events into overlapping `dom` (especially window).
