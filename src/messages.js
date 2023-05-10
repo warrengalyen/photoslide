@@ -10,5 +10,11 @@ export default {
       autoplay: 'Autoplay',
       fullscreen: 'Fullscreen',
     },
+    slides: {
+      empty: {
+        title: 'empty',
+        description: 'Please add slides in preferences.',
+      },
+    },
   },
 };
