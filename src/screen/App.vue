@@ -1,14 +1,12 @@
 <template>
   <LoadingIntro v-if="state.loading"/>
   <Container v-else/>
-  <p class="log">
-    {{$store.state.activeSlide}}
-  </p>
 </template>
 
 <script>
-import { defineComponent, reactive, onMounted, watch } from 'vue';
+import { defineComponent, reactive, watch, onMounted, nextTick } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
 import * as util from '~/libs/util';
 import Container from '~/screen/Container';
 import LoadingIntro from '~/components/Loading/Intro';
@@ -22,6 +20,7 @@ export default defineComponent({
   setup()
   {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
     let state = reactive({
       loading: true,
       dev: process.env.NODE_ENV === 'development',
@@ -44,34 +43,36 @@ export default defineComponent({
       const $html = document.querySelector('html');
       $html.dataset['color'] = theme;
     }
-    function start()
+    async function start()
     {
+      // TODO: delay
+      await util.sleep(1000);
+      // set color mode
+      updateTheme(store.state.preference.general.screenColor);
+      // TODO: restore the values from storage to the vuex area
+      // TODO: Otherwise, json values in the server are retrieved and restored to the vuex area.
+      // off loading
       state.loading = false;
     }
     function stop()
     {
       state.loading = true;
     }
-    async function restart()
+    function restart()
     {
+      if (!confirm(t('main.confirmRestart'))) return;
       stop();
-      // TODO: I arbitrarily delayed it by 3 seconds, but I need to find a reasonable delay time.
-      await util.sleep(3000);
-      start();
+      nextTick().then(start);
     }
+
+    // lifecycles
+    onMounted(() => {
+      start().then();
+    });
 
     // watch
     watch(() => store.state.preference, () => {
-      console.log('updated preferences');
-    });
-
-    // lifecycles
-    onMounted(async () => {
-      await util.sleep(500);
-      // TODO: restore the values from storage to the vuex area
-      // TODO: Otherwise, json values in the server are retrieved and restored to the vuex area.
-      updateTheme(store.state.preference.general.screenColor);
-      state.loading = false;
+      console.warn('update preference');
     });
 
     return {

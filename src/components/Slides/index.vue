@@ -26,15 +26,15 @@
       @animation-control="onAnimationControl"
       @change-active="onChangeActive"/>
     <Caption
-    v-if="$store.state.preference.general.visibleContents.caption"
-    :active="$store.state.activeSlide"
+      v-if="state.computedVisibleCaption"
+      :active="$store.state.activeSlide"
       :type="$store.state.preference.slides.animationCaptionType"
       :title="state.computedCaption.title"
       :description="state.computedCaption.description"
       :animation-type="$store.state.preference.slides.animationCaptionType"
       class="slideshow-slides__caption"/>
     <Controller
-    v-if="$store.state.preference.general.visibleContents.controller"
+      v-if="state.computedVisibleController"
       :disabled="state.animated"
       :show-prev="state.computedShowPrevButton"
       :show-next="state.computedShowNextButton"
@@ -42,9 +42,9 @@
       @click-prev="prev"
       @click-next="next"/>
     <Paginate
-    v-if="$store.state.preference.general.visibleContents.paginate"
+      v-if="state.computedVisiblePaginate"
       :total="state.computedImages.length"
-    :current="$store.state.activeSlide"
+      :current="$store.state.activeSlide"
       class="slideshow-slides__paginate"/>
   </article>
 </template>
@@ -92,6 +92,18 @@ export default defineComponent({
           title: item.title,
           description: item.description,
         };
+      }),
+      computedVisibleCaption: computed(() => {
+        const { hud, visibleContents } = store.state.preference.general;
+        return hud && visibleContents.caption;
+      }),
+      computedVisibleController: computed(() => {
+        const { hud, visibleContents } = store.state.preference.general;
+        return hud && visibleContents.controller;
+      }),
+      computedVisiblePaginate: computed(() => {
+        const { hud, visibleContents } = store.state.preference.general;
+        return hud && visibleContents.paginate;
       }),
     });
     let swipeMeta = null; // It contains the necessary information when swiping the slide.
