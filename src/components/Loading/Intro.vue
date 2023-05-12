@@ -71,7 +71,7 @@ export default defineComponent({
       margin: 48px 0 0;
       font-size: 24px;
       font-weight: 200;
-      letter-spacing: 2px;
+      //letter-spacing: 2px;
     }
     &--move {
       .unit {
