@@ -1,5 +1,8 @@
 export default {
   en: {
+    main: {
+      confirmRestart: 'Do you really want to restart?',
+    },
     loading: {
       label: 'Ready Photoslide..',
     },
