@@ -62,13 +62,13 @@ export default defineComponent({
           shuffle(elementTitle.value, {
             text: props.title,
             fps: props.animationSpeed,
+            randomTextType: 'pattern',
           });
           interval = setTimeout(() => {
             clearTimer();
             shuffle(elementDescription.value, {
               text: props.description,
               fps: props.animationSpeed,
-              randomTextType: 'pattern',
             });
           }, 300);
           break;
