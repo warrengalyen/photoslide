@@ -25,9 +25,9 @@
     <Caption
       v-if="state.computedVisibleCaption"
       :active="$store.state.activeSlide"
-      :type="$store.state.preference.slides.animationCaptionType"
       :title="state.computedCaption.title"
       :description="state.computedCaption.description"
+    :animation-type="$store.state.preference.slides.animationCaptionType"
       :animation-speed="$store.state.preference.slides.animationCaptionSpeed"
       :position="$store.state.preference.style.captionPosition"
       :scale="$store.state.preference.style.captionScale"/>
@@ -92,16 +92,16 @@ export default defineComponent({
         };
       }),
       computedVisibleCaption: computed(() => {
-        const { hud, visibleContents } = store.state.preference.general;
-        return hud && visibleContents.caption;
+        const { hud, visibleHudContents } = store.state.preference.general;
+        return hud && visibleHudContents.caption;
       }),
       computedVisibleController: computed(() => {
-        const { hud, visibleContents } = store.state.preference.general;
-        return hud && visibleContents.controller;
+        const { hud, visibleHudContents } = store.state.preference.general;
+        return hud && visibleHudContents.controller;
       }),
       computedVisiblePaginate: computed(() => {
-        const { hud, visibleContents } = store.state.preference.general;
-        return hud && visibleContents.paginate;
+        const { hud, visibleHudContents } = store.state.preference.general;
+        return hud && visibleHudContents.paginate;
       }),
     });
     let swipeMeta = null; // It contains the necessary information when swiping the slide.

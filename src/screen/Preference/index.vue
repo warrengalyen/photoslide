@@ -28,7 +28,9 @@
         </header>
         <div class="preference__content">
           <component
-            :is="state.computedContentComponent"/>
+            :is="state.computedContentComponent"
+            :structure="state.structure[state.tab]"
+            @update="onUpdateFields"/>
         </div>
       </form>
     </div>
@@ -116,18 +118,26 @@ export default defineComponent({
     {
       store.commit('changeMode', null);
     }
+    function onUpdateFields(structure)
+    {
+      console.log(state.structure[state.tab], structure);
+    }
+
     // lifecycles
     onMounted(() => {
       if (local.slides) local.slides.pause(true);
+      store.commit('useKeyboardEvent', false);
     });
     onUnmounted(() => {
       if (local.slides) local.slides.pause(false);
+      store.commit('useKeyboardEvent', true);
     });
     return {
       state,
       onChangeTab,
       onSubmit,
       onClose,
+      onUpdateFields,
     };
   },
 });

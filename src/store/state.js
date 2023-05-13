@@ -3,11 +3,10 @@ export default {
     general: {
       name: 'Photoslide',
       description: 'slideshow description',
-      screenColor: 'light', // dark,light,system
       language: 'en',
       hud: true,
-      hoverVisibleContents: false,
-      visibleContents: {
+      hoverVisibleHud: false,
+      visibleHudContents: {
         menu: true,
         thumbnail: true,
         caption: true,
@@ -16,6 +15,7 @@ export default {
       },
     },
     style: {
+      screenColor: 'light', // dark,light,system
       imageScale: ['85%','85%'], // [ width, height ]
       imageType: null, // null,contain,cover
       captionScale: 100, // %
@@ -25,7 +25,7 @@ export default {
       initialNumber: 0,
       animationType: 'horizontal', // null,none,fade,horizontal
       animationSpeed: 500,
-      animationCaptionType: null, // null,shuffle
+      animationCaptionType: 'none', // none,shuffle
       animationCaptionSpeed: 40,
       autoplay: false,
       autoplayDelay: 3000,
@@ -94,7 +94,8 @@ export default {
       description : 'nexxtt description',
     },
   ],
-  mode: null, // null,thumbnail,preference
+  mode: 'preference', // null,thumbnail,preference
   activeSlide: undefined,
+  keyboardEvent: true,
   dev: process.env.NODE_ENV === 'development', // TODO: You can delete it if you don't use it.
 };

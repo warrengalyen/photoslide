@@ -2,7 +2,7 @@
   <div
     :class="[
     'slideshow',
-    $store.state.preference.general.hoverVisibleContents && 'slideshow--hover',
+    $store.state.preference.general.hoverVisibleHud && 'slideshow--hover',
   ]">
     <Slides
       v-if="state.existSlideItem"
@@ -56,20 +56,19 @@ export default defineComponent({
         }
       }),
       computedShowThumbnail: computed(() => {
-        return store.state.preference.general.visibleContents.thumbnail && state.computedMode === 'thumbnail';
+        return store.state.preference.general.visibleHudContents.thumbnail && state.computedMode === 'thumbnail';
       }),
       computedShowPreference: computed(() => {
         return state.computedMode === 'preference';
       }),
     });
     const slides = ref(null);
-    let pauseKeyboardEvent = false;
     let keys = [];
 
     // methods
     function onKeyup(e)
     {
-      if (pauseKeyboardEvent) return;
+      if (!store.state.keyboardEvent) return;
       const keyName = e.key.toLowerCase();
       if (keys.length > 1)
       {
@@ -118,7 +117,7 @@ export default defineComponent({
     }
     function onKeydown(e)
     {
-      if (pauseKeyboardEvent) return;
+      if (!store.state.keyboardEvent) return;
       const keyName = e.key.toLowerCase();
       if (keys.indexOf(keyName) > -1) return;
       keys.push(keyName);

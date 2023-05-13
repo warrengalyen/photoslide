@@ -48,7 +48,7 @@ export default defineComponent({
       // TODO: delay
       await util.sleep(1000);
       // set color mode
-      updateTheme(store.state.preference.general.screenColor);
+      updateTheme(store.state.preference.style.screenColor);
       // TODO: restore the values from storage to the vuex area
       // TODO: Otherwise, json values in the server are retrieved and restored to the vuex area.
       // off loading
@@ -63,6 +63,9 @@ export default defineComponent({
       if (!confirm(t('main.confirmRestart'))) return;
       stop();
       nextTick().then(start);
+    }
+    function pauseKeyboard()
+    {
     }
 
     // lifecycles
