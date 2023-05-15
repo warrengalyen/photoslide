@@ -120,3 +120,24 @@ export function fullscreen(sw)
     cancelFullScreen.call(doc);
   }
 }
+
+/**
+ * get value from type
+ * Get value by type
+ *
+ * @param {string} type
+ * @param {string} value
+ * @return {any}
+ */
+export function getValueFromType(type, value)
+{
+  switch (type)
+  {
+    case 'boolean':
+      return (value === 'true');
+    case 'number':
+      return Number(value);
+    default:
+      return value;
+  }
+}
