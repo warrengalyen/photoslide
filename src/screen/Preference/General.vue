@@ -1,5 +1,5 @@
 <template>
-  <div class="preference-general">
+  <div>
     <fieldset>
       <legend>General fields</legend>
       <div class="field-basic">
@@ -14,7 +14,7 @@
             v-model="state.name"
             @update:modelValue="onSave"/>
           <p class="field-description">
-            TODO
+            Enter a slide title.
           </p>
         </div>
       </div>
@@ -31,7 +31,7 @@
             v-model="state.description"
             @update:modelValue="onSave"/>
           <p class="field-description">
-            TODO
+            Enter a description for the slide.
           </p>
         </div>
       </div>
@@ -43,12 +43,14 @@
           <FormSelect
             name="pref_language"
             id="pref_language"
-            :placeholder="null"
             v-model="state.language"
             @update:modelValue="onSave">
             <option value="en">English</option>
           </FormSelect>
         </div>
+        <p class="field-description">
+          Set the message language.
+        </p>
       </div>
       <div class="field-switch">
         <div class="field-switch__body">
@@ -56,7 +58,7 @@
             <label for="pref_hud">Visible HUD</label>
           </h3>
           <p class="field-description">
-            TODO
+            Shows operation and state elements.
           </p>
         </div>
         <div class="field-switch__input">
@@ -73,6 +75,7 @@
             <label for="pref_hoverVisibleHud">Visible Hover HUD</label>
           </h3>
           <p class="field-description">
+            When hovering the mouse over the slide area, operation and state elements are hidden.<br/>
             If you overlay mouse, HUD will be hidden.
           </p>
         </div>
@@ -133,6 +136,9 @@
             </li>
           </ul>
         </div>
+        <p class="field-description">
+          Controls the display of each operation and status element.
+        </p>
       </div>
     </fieldset>
   </div>
@@ -165,7 +171,7 @@ export default defineComponent({
       language: props.structure.language,
       hud: props.structure.hud,
       hoverVisibleHud: props.structure.hoverVisibleHud,
-      visibleHudContents: props.structure.visibleHudContents,
+      visibleHudContents: object.convertPureObject(props.structure.visibleHudContents),
     });
 
     // methods
@@ -193,6 +199,4 @@ export default defineComponent({
 </script>
 
 <style src="./fieldset.scss" lang="scss" scoped></style>
-<style lang="scss" scoped>
-.preference-general {}
-</style>
+
