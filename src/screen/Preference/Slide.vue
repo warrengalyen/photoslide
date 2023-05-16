@@ -1,11 +1,14 @@
 <template>
-  <div class="preference-general">
-    <fieldset>
-      <legend>Slide fields</legend>
+  <fieldset>
+    <legend>Slide fields</legend>
+    <div class="fields">
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_name">Initial slide number</label>
+          <label for="pref_initialNumber">Initial slide number</label>
         </h3>
+        <p class="field-description">
+          Slide number to activate when running for the first time
+        </p>
         <div class="field-basic__body">
           <FormText
             type="tel"
@@ -19,14 +22,15 @@
             model-type="number"
             @update:modelValue="onSave"/>
         </div>
-        <p class="field-description">
-          Slide number to activate when running for the first time
-        </p>
       </div>
+      <hr class="field-line">
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_name">Animation type</label>
+          <label for="pref_animationType">Animation type</label>
         </h3>
+        <p class="field-description">
+          select the transition when the slide changes
+        </p>
         <div class="field-basic__body">
           <FormSelect
             name="pref_animationType"
@@ -38,14 +42,14 @@
             <option value="horizontal">horizontal</option>
           </FormSelect>
         </div>
-        <p class="field-description">
-          select the transition when the slide changes
-        </p>
       </div>
       <div class="field-basic">
         <h3 class="field-title">
           <label for="pref_animationSpeed">Animation speed</label>
         </h3>
+        <p class="field-description">
+          adjusts the transition animation speed
+        </p>
         <div class="field-basic__inline">
           <label class="label">
             <FormText
@@ -62,14 +66,15 @@
             <span>ms</span>
           </label>
         </div>
-        <p class="field-description">
-          transition animation speed
-        </p>
       </div>
+      <hr class="field-line">
       <div class="field-basic">
         <h3 class="field-title">
           <label for="pref_captionAnimationType">Caption animation type</label>
         </h3>
+        <p class="field-description">
+          Select the caption transition when the slide changes.
+        </p>
         <div class="field-basic__body">
           <FormSelect
             name="pref_captionAnimationType"
@@ -80,14 +85,14 @@
             <option value="shuffle">Shuffle</option>
           </FormSelect>
         </div>
-        <p class="field-description">
-          Select the caption transition when the slide changes.
-        </p>
       </div>
       <div class="field-basic">
         <h3 class="field-title">
           <label for="pref_captionAnimationSpeed">Caption animation speed</label>
         </h3>
+        <p class="field-description">
+          higher values result in faster animations
+        </p>
         <div class="field-basic__inline">
           <FormText
             type="tel"
@@ -101,10 +106,8 @@
             model-type="number"
             @update:modelValue="onSave"/>
         </div>
-        <p class="field-description">
-          higher values result in faster animations
-        </p>
       </div>
+      <hr class="field-line">
       <div class="field-switch">
         <div class="field-switch__body">
           <h3 class="field-title">
@@ -126,6 +129,9 @@
         <h3 class="field-title">
           <label for="pref_autoplayDelay">Autoplay delay</label>
         </h3>
+        <p class="field-description">
+          The amount of time the slide waits before automatically transitioning.
+        </p>
         <div class="field-basic__inline">
           <label class="label">
             <FormText
@@ -142,14 +148,14 @@
             <span>ms</span>
           </label>
         </div>
-        <p class="field-description">
-          The amount of time the slide waits before automatically transitioning.
-        </p>
       </div>
       <div class="field-basic">
         <h3 class="field-title">
           <label for="pref_autoplayDirection">Autoplay direction</label>
         </h3>
+        <p class="field-description">
+          Set the direction in which slides automatically turn.
+        </p>
         <div class="field-basic__inline">
           <FormRadio
             name="pref_autoplayDirection"
@@ -162,9 +168,6 @@
             v-model="state.autoplayDirection"
             @update:modelValue="onSave"/>
         </div>
-        <p class="field-description">
-          the direction the slide automatically turns to
-        </p>
       </div>
       <div class="field-switch">
         <div class="field-switch__body">
@@ -183,7 +186,7 @@
             @update:modelValue="onSave"/>
         </div>
       </div>
-
+      <hr class="field-line">
       <div class="field-switch">
         <div class="field-switch__body">
           <h3 class="field-title">
@@ -218,8 +221,8 @@
             @update:modelValue="onSave"/>
         </div>
       </div>
-    </fieldset>
-  </div>
+    </div>
+  </fieldset>
 </template>
 
 <script>
@@ -228,7 +231,6 @@ import * as object from '~/libs/object';
 import FormText from '~/components/Form/Text';
 import FormSelect from '~/components/Form/Select';
 import FormSwitch from '~/components/Form/Switch';
-import FormCheckbox from '~/components/Form/Checkbox';
 import FormRadio from '~/components/Form/Radio';
 
 export default defineComponent({
@@ -237,7 +239,6 @@ export default defineComponent({
     FormText,
     FormSelect,
     FormSwitch,
-    FormCheckbox,
     FormRadio,
   },
   props: {

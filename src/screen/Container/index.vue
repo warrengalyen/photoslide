@@ -77,17 +77,6 @@ export default defineComponent({
       }
       else
       {
-        /**
-         * key guide
-         *
-         * `<-`: go to previous slide
-         * `->`: go to the next slide
-         * `a`: autoplay toggle
-         * `s`: toggle preferences
-         * `t`: thumbnail list screen toggle
-         * `r`: redo
-         * `h`: toggle visibility of all hud elements
-         */
         switch (keyName)
         {
           case 'arrowleft':
@@ -128,7 +117,7 @@ export default defineComponent({
       // setup slides
       local.setupSlides(slides.value);
       // on keyboard event
-      if (store.state.preference.keyboard.enable)
+      if (store.state.preference.keyboard.enabled)
       {
         window.on('keyup.slideshow-keyboard', onKeyup);
         window.on('keydown.slideshow-keyboard', onKeydown);
@@ -136,7 +125,7 @@ export default defineComponent({
     });
     onUnmounted(() => {
       // off keyboard event
-      if (store.state.preference.keyboard.enable)
+      if (store.state.preference.keyboard.enabled)
       {
         window.off('keyup.slideshow-keyboard');
         window.off('keydown.slideshow-keyboard');
