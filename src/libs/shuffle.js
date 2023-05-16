@@ -18,8 +18,8 @@ function shuffle($el, options)
     fps: 60, // speed
     pattern: 'abcdefghijklmnopqrstuvwxyz0123456789-_!@#$%^&*()+~<>', // random text pattern
     randomTextType: null, // unicode,pattern
-    retry: true, // 
-    callback: null, // 
+    retry: true, // Each time the function runs, the text is created anew.
+    callback: null, // function to be executed after animation
   }, options);
   options.text = options.text.trim();
 
