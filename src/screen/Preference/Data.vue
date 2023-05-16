@@ -12,7 +12,7 @@
               type="text"
               name="api_address"
               id="api_address"
-              v-model="state.apiAddress"
+              v-model="localState.apiAddress"
               placeholder="https://service.com/filename.json"/>
           </div>
           <div>
@@ -37,7 +37,7 @@
       </div>
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_description">Edit slide data</label>
+          <label for="pref_slides">Edit slide data</label>
         </h3>
         <p class="field-description">
           get data through restapi
@@ -47,12 +47,13 @@
           device that actually applies them. -->
           <FormText
             type="textarea"
-            name="pref_dataText"
-            id="pref_dataText"
-            placeholder="Please input JSON code"
-            :rows="8"
-            v-model="state.dataText"
-            @update:modelValue="onSave"/>
+            name="pref_slides"
+            id="pref_slides"
+            placeholder="Please input slides code"
+            :color="state.slidesColor"
+            :rows="10"
+            v-model="state.slides"
+            @update:modelValue="onUpdateSlideSource"/>
         </div>
       </div>
     </div>
@@ -76,10 +77,14 @@ export default defineComponent({
   props: {},
   setup(props, context)
   {
-    let state = reactive({
-      apiAddress: '',
-      dataText: '',
+    let localState = reactive({
+      apiAddress: 'http://localhost:3000/foo.json',
+      slidesColor: undefined,
     });
+    let state = reactive({
+      slides: '',
+    });
+    let timer = undefined;
 
     // methods
     function onSave()
@@ -89,18 +94,70 @@ export default defineComponent({
     }
     function importDataOnAddress()
     {
-      console.log('importDataOnAddress()');
+      console.log('importDataOnAddress()', localState.apiAddress);
+      try
+      {
+        if (!localState.apiAddress) throw new Error('no address');
+        // TODO: url inspection
+        // TODO: http-request
+        // TODO: get the values and put them into state slides
+        // TODO: checking values with checkslidesource
+      }
+      catch(e)
+      {
+        console.error('ERROR:', e);
+      }
     }
-    function importDataOnFile()
+    function importDataOnFile(files)
     {
-      console.log('importDataOnFile()');
+      if (!(files && files.length))
+      {
+        alert('no file selected');
+        return;
+      }
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = e => {
+        try
+        {
+          let json = JSON.parse(String(e.target.result));
+          state.slides = JSON.stringify(json, null, 2);
+          checkSlideSource();
+        }
+        catch(e)
+        {
+          alert('file import failed');
+        }
+      };
+      reader.readAsText(file);
+    }
+    function onUpdateSlideSource()
+    {
+      if (timer) clearTimeout(timer);
+      onSave();
+      timer = setTimeout(checkSlideSource, 1000);
+    }
+    function checkSlideSource()
+    {
+      try
+      {
+        let obj = JSON.parse(state.slides);
+        if (!object.checkSlideItems(obj)) throw new Error('error parse');
+        state.slidesColor = undefined;
+      }
+      catch(e)
+      {
+        state.slidesColor = 'error';
+      }
     }
 
     return {
       state,
+      localState,
       onSave,
       importDataOnAddress,
       importDataOnFile,
+      onUpdateSlideSource,
     };
   },
   emits: {
