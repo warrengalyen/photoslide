@@ -1,10 +1,7 @@
 <template>
   <article class="preference" @click="onClose">
     <div class="preference__wrap" @click="e => { e.stopPropagation() }">
-      <Side
-        :mode="state.tab"
-        class="preference__side"
-        @click-menu="onChangeTab"/>
+      <Side :mode="state.tab" @click-menu="onChangeTab"/>
       <form class="preference__body" @submit="onSubmit">
         <header class="preference-header">
           <div class="preference-header__body">
@@ -26,7 +23,7 @@
             </button>
           </nav>
         </header>
-        <div class="preference__content">
+        <div ref="content" class="preference__content">
           <component
             :is="state.computedContentComponent"
             :structure="state.structure[state.tab]"
@@ -38,7 +35,7 @@
 </template>
 
 <script>
-import { defineComponent, defineAsyncComponent, reactive, computed, onMounted, onUnmounted } from 'vue';
+import { defineComponent, defineAsyncComponent, reactive, computed, onMounted, onUnmounted, watch, ref } from 'vue';
 import { useStore } from 'vuex';
 import * as object from '~/libs/object';
 import * as local from '~/libs/local';
@@ -54,6 +51,7 @@ export default defineComponent({
   {
     const store = useStore();
     let state = reactive({
+      // TODO: I am randomly changing the tab for work, but when the work is finished, change to `general`
       tab: 'data', // general,slides,style,data,keyboard
       structure: object.convertPureObject(store.state.preference),
       computedContentComponent: computed(() => {
@@ -104,6 +102,8 @@ export default defineComponent({
         }
       }),
     });
+    const content = ref(null);
+
     // methods
     function onChangeTab(name)
     {
@@ -133,8 +133,13 @@ export default defineComponent({
       if (local.slides) local.slides.pause(false);
       store.commit('useKeyboardEvent', true);
     });
+
+    // watch
+    watch(() => state.tab, () => content.value.scrollTo(0, 0));
+
     return {
       state,
+      content,
       onChangeTab,
       onSubmit,
       onClose,

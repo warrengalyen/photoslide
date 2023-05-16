@@ -19,8 +19,7 @@ export default defineComponent({
   },
   setup()
   {
-    const store = useStore();
-    const { t } = useI18n({ useScope: 'global' });
+    let store = useStore();
     let state = reactive({
       loading: true,
       dev: process.env.NODE_ENV === 'development',
@@ -43,16 +42,11 @@ export default defineComponent({
       const $html = document.querySelector('html');
       $html.dataset['color'] = theme;
     }
-    async function start()
+    function start()
     {
-      // TODO: delay
-      await util.sleep(1000);
-      // set color mode
-      updateTheme(store.state.preference.style.screenColor);
-      // TODO: restore the values from storage to the vuex area
-      // TODO: Otherwise, json values in the server are retrieved and restored to the vuex area.
-      // off loading
-      state.loading = false;
+      util.sleep(1000).then(() => {
+        state.loading = false;
+      });
     }
     function stop()
     {
@@ -60,14 +54,17 @@ export default defineComponent({
     }
     function restart()
     {
-      if (!confirm(t('main.confirmRestart'))) return;
-      stop();
-      nextTick().then(start);
+      state.loading = true;
+      util.sleep(100).then(() => {
+        updateTheme(store.state.preference.style.screenColor);
+        state.loading = false;
+      });
     }
 
     // lifecycles
     onMounted(() => {
-      start().then();
+      updateTheme(store.state.preference.style.screenColor);
+      start();
     });
 
     // watch
@@ -77,9 +74,9 @@ export default defineComponent({
 
     return {
       state,
-      restart,
       start,
       stop,
+      restart,
     };
   }
 });
