@@ -7,7 +7,7 @@
           <label for="pref_initialNumber">Initial slide number</label>
         </h3>
         <p class="field-description">
-          Slide number to activate when running for the first time
+          Slide number to be activated when running for the first time (Number starts from 0)
         </p>
         <div class="field-basic__body">
           <FormText
@@ -38,7 +38,7 @@
             v-model="state.animationType"
             @update:modelValue="onSave">
             <option value="none">none</option>
-            <option value="slide">slide</option>
+            <option value="fade">fade</option>
             <option value="horizontal">horizontal</option>
           </FormSelect>
         </div>

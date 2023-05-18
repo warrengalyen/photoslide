@@ -12,6 +12,7 @@ export default {
       preference: 'Preferences',
       autoplay: 'Autoplay',
       fullscreen: 'Fullscreen',
+      guide: 'Guide',
     },
     slides: {
       empty: {
