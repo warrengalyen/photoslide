@@ -45,7 +45,7 @@
           <label for="pref_slides">Edit slide data</label>
         </h3>
         <p class="field-description">
-          get data through restapi
+          get json data through restapi
         </p>
         <div class="field-basic__body">
           <FormText

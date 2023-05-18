@@ -3,7 +3,7 @@
 .thumbnail {
   box-sizing: border-box;
   position: fixed;
-  z-index: 3;
+  z-index: 5;
   left: 0;
   right: 0;
   top: 0;
@@ -11,6 +11,7 @@
   background: var(--color-bg);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  @include custom-scroll-style();
 
   &__header {
     padding: 64px 0 0;
@@ -30,14 +31,14 @@
   }
   &__index {
     --column: 2;
-    --gap: 4px;
+    --gap: 2px;
     --item-height: 35vw;
     list-style: none;
     margin: 20px auto 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(var(--column), 1fr);
-    gap : var ( --gap );
+    gap: var(--gap);
     user-select: none;
     li {
       height: var(--item-height);
@@ -112,7 +113,7 @@
       max-width: 1920px;
       margin: 42px auto 0;
       --column: 4;
-      --gap: 24px;
+      --gap: 16px;
       --item-height: 16vw;
       li {
         max-height: 220px;
