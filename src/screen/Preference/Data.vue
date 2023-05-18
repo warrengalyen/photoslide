@@ -4,20 +4,24 @@
     <div class="fields">
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="api_address">API Address</label>
+          <label for="apiAddress">API Address</label>
         </h3>
         <div class="field-multiple">
           <div class="field-multiple__body">
             <FormText
+              ref="textApiAddress"
               type="text"
-              name="api_address"
-              id="api_address"
+              name="apiAddress"
+              id="apiAddress"
+              :disabled="localState.apiAddressDisableButton"
               v-model="localState.apiAddress"
-              placeholder="https://service.com/filename.json"/>
+              placeholder="https://service.com/filename.json"
+              @keydown.enter="importDataOnAddress"/>
           </div>
           <div>
             <ButtonBasic
               color="key"
+              :disabled="localState.apiAddressDisableButton"
               @click="importDataOnAddress">
               Get data
             </ButtonBasic>
@@ -28,6 +32,7 @@
         </p>
         <div class="field-upload">
           <FormUpload
+            ref="fileUpload"
             accept="application/json"
             @change="importDataOnFile"/>
         </div>
@@ -43,9 +48,8 @@
           get data through restapi
         </p>
         <div class="field-basic__body">
-          <!-- TODO: If you update data every time you input, error checks occur a lot, so it seems that you need a
-          device that actually applies them. -->
           <FormText
+            ref="textSlides"
             type="textarea"
             name="pref_slides"
             id="pref_slides"
@@ -61,8 +65,10 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref, nextTick } from 'vue';
 import * as object from '~/libs/object';
+import * as string from '~/libs/string';
+import * as util from '~/libs/util';
 import FormText from '~/components/Form/Text';
 import FormUpload from '~/components/Form/Upload';
 import ButtonBasic from '~/components/Button/Basic';
@@ -74,16 +80,22 @@ export default defineComponent({
     FormUpload,
     ButtonBasic,
   },
-  props: {},
+  props: {
+    structure: Object,
+  },
   setup(props, context)
   {
     let localState = reactive({
-      apiAddress: 'http://localhost:3000/foo.json',
+      apiAddress: 'https://',
+      apiAddressDisableButton: false,
       slidesColor: undefined,
     });
     let state = reactive({
-      slides: '',
+      slides: props.structure.slides,
     });
+    const textSlides = ref(null);
+    const textApiAddress = ref(null);
+    const fileUpload = ref(null);
     let timer = undefined;
 
     // methods
@@ -92,20 +104,51 @@ export default defineComponent({
       const structure = object.convertPureObject(state);
       context.emit('update', structure);
     }
-    function importDataOnAddress()
+    function importDataOnAddress(e)
     {
-      console.log('importDataOnAddress()', localState.apiAddress);
+      if (e) e.preventDefault();
+      function error()
+      {
+        alert('failed to get data.');
+        localState.apiAddressDisableButton = false;
+        nextTick().then(() => textApiAddress.value.focus());
+      }
+
       try
       {
+        localState.apiAddressDisableButton = true;
         if (!localState.apiAddress) throw new Error('no address');
-        // TODO: url inspection
-        // TODO: http-request
-        // TODO: get the values and put them into state slides
-        // TODO: checking values with checkslidesource
+        if (!string.validUrl(localState.apiAddress)) throw new Error('wrong url');
+        const httpRequest = new XMLHttpRequest();
+        if (!httpRequest) throw new Error('no XMLHttpRequest');
+        httpRequest.onreadystatechange = () => {
+          if (httpRequest.readyState !== XMLHttpRequest.DONE) return;
+          try
+          {
+            if (httpRequest.status === 200)
+            {
+              JSON.parse(httpRequest.responseText);
+              state.slides = httpRequest.responseText;
+              checkSlideSource();
+              localState.apiAddressDisableButton = false;
+              textSlides.value.focus();
+            }
+            else
+            {
+              throw new Error('failed request url');
+            }
+          }
+          catch(e)
+          {
+            error();
+          }
+        }
+        httpRequest.open('get', localState.apiAddress);
+        httpRequest.send();
       }
       catch(e)
       {
-        console.error('ERROR:', e);
+        error();
       }
     }
     function importDataOnFile(files)
@@ -123,6 +166,7 @@ export default defineComponent({
           let json = JSON.parse(String(e.target.result));
           state.slides = JSON.stringify(json, null, 2);
           checkSlideSource();
+          textSlides.value.focus();
         }
         catch(e)
         {
@@ -154,6 +198,9 @@ export default defineComponent({
     return {
       state,
       localState,
+      textSlides,
+      textApiAddress,
+      fileUpload,
       onSave,
       importDataOnAddress,
       importDataOnFile,

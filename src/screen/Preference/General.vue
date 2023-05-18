@@ -50,7 +50,7 @@
             v-model="state.language"
             @update:modelValue="onSave">
             <option value="en">English</option>
-            <option value="en">Korean</option>
+            <option value="ko">Korean</option>
           </FormSelect>
         </div>
       </div>
@@ -302,9 +302,9 @@ export default defineComponent({
     }
     function onClickReset()
     {
-      if (!confirm('')) return;
+      if (!confirm('Are you sure you want to reset all settings and slide data?\nonce initialized it cannot be recovered')) return;
       store.commit('reset');
-      alert('');
+      alert('has been initialized');
       local.main.restart();
     }
 
