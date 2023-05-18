@@ -50,10 +50,19 @@ export default defineComponent({
   setup()
   {
     const store = useStore();
+    const preference = object.convertPureObject(store.state.preference);
+    const slides = object.convertPureObject(store.state.slides);
     let state = reactive({
-      // TODO: I am randomly changing the tab for work, but when the work is finished, change to `general`
-      tab: 'data', // general,slides,style,data,keyboard
-      structure: object.convertPureObject(store.state.preference),
+      tab: 'general', // general,slides,style,data,keyboard
+      structure: {
+        general: preference.general,
+        slides: preference.slides,
+        style: preference.style,
+        data: {
+          slides: JSON.stringify(slides, null, 2),
+        },
+        keyboard: preference.keyboard,
+      },
       computedContentComponent: computed(() => {
         switch (state.tab)
         {

@@ -3,7 +3,7 @@ export default {
     general: {
       name: 'Photoslide',
       description: 'slideshow description',
-      language: 'en', // en,en
+      language: 'en', // en,ko
       hud: true,
       hoverVisibleHud: false,
       visibleHudContents: {
