@@ -6,6 +6,10 @@
         <h3 class="field-title">
           <label for="apiAddress">API Address</label>
         </h3>
+        <p class="field-description">
+          You can input slide data through 'RestAPI' or 'json' file.<br/>
+          As you enter data, it will be replaced with what you entered in the Edit Slides section.
+        </p>
         <div class="field-multiple">
           <div class="field-multiple__body">
             <FormText

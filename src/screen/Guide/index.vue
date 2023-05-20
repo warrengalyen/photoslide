@@ -3,6 +3,7 @@
     <header class="guide__header">
       <h2>Photoslide guide</h2>
       <p>a guide to slideshows</p>
+      <ButtonClose class="guide__close" @click="onClose"/>
     </header>
     <section>
       .section
@@ -14,11 +15,23 @@
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import * as local from '~/libs/local';
+import ButtonClose from '~/components/Button/Close';
+
 export default defineComponent({
   name: 'Guide',
+  components: {
+    ButtonClose,
+  },
   setup()
   {
     const store = useStore();
+
+    // methods
+    function onClose()
+    {
+      store.commit('changeMode', null);
+    }
+
     // lifecycles
     onMounted(() => {
       if (local.slides) local.slides.pause(true);
@@ -26,7 +39,10 @@ export default defineComponent({
     onUnmounted(() => {
       if (local.slides) local.slides.pause(false);
     });
-    return {};
+
+    return {
+      onClose,
+    };
   },
 });
 </script>
