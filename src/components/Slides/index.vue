@@ -125,7 +125,7 @@ export default defineComponent({
     }
     function onChangeActive(n)
     {
-      store.commit('changeActiveSlide', n);
+      store.dispatch('changeActiveSlide', n);
 
     }
     function checkActive(n)
@@ -281,7 +281,7 @@ export default defineComponent({
     }
     function autoplay(sw = undefined)
     {
-      store.commit('toggleAutoplay', sw);
+      store.dispatch('toggleAutoplay', sw);
     }
     function pause(sw = undefined)
     {

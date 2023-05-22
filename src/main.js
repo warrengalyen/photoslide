@@ -13,7 +13,7 @@ import '~/scss/main.scss';
 // initial i18n
 const i18n = createI18n({
   legacy: false,
-  locale: store.state.preference.general.language || 'en',
+  locale: 'en',
   fallbackLocale: 'en',
   messages,
 });

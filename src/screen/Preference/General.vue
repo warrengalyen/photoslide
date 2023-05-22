@@ -14,6 +14,7 @@
             name="pref_name"
             id="pref_name"
             placeholder="Please input text"
+            :maxlength="30"
             v-model="state.name"
             @update:modelValue="onSave"/>
         </div>
@@ -279,11 +280,11 @@ export default defineComponent({
               let json = JSON.parse(String(e.target.result));
               if (!confirm(`do you really want to restore all your data\nthis action will delete all current data`)) return;
               if (!(json.preference && json.slides)) throw new Error('no data');
-              store.commit('updatePreference', json.preference);
-              store.commit('updateSlides', json.slides);
-              store.commit('changeMode', null);
-              store.commit('changeActiveSlide', json.preference.slides.initialNumber);
-              store.commit('useKeyboardEvent', true);
+              store.dispatch('changePreference', json.preference);
+              store.dispatch('changeSlides', json.slides);
+              store.dispatch('changeMode', null);
+              store.dispatch('changeActiveSlide', json.preference.slides.initialNumber);
+              store.commit('updateUseKeyboardEvent', true);
               alert('restoration completed');
               local.main.restart();
             }
@@ -300,8 +301,7 @@ export default defineComponent({
     function onClickReset()
     {
       if (!confirm('Are you sure you want to reset all settings and slide data?\nonce initialized it cannot be recovered')) return;
-      store.commit('reset');
-      alert('has been initialized');
+      store.dispatch('reset');
       local.main.restart();
     }
 

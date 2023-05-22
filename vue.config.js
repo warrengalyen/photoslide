@@ -13,15 +13,4 @@ module.exports = {
       }
     },
   },
-  // TODO: It doesn't seem to be used much, but if you do use it a lot, uncomment it.
-  // css: {
-  //   loaderOptions: {
-  //     sass: {
-  //       additionalData: `
-  //         @import "~@/scss/mixins";
-  //         @import "~@/scss/variables";
-  //       `,
-  //     },
-  //   },
-  // },
 };
