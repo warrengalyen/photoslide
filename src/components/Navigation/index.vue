@@ -92,7 +92,7 @@ export default defineComponent({
     // methods
     function onClickThumbnailButton(sw)
     {
-      store.commit('changeMode', sw ? 'thumbnail' : null);
+      store.dispatch('changeMode', sw ? 'thumbnail' : null);
     }
     function onClickMenuButton(e)
     {
@@ -117,7 +117,7 @@ export default defineComponent({
       switch (key)
       {
         case 'preference':
-          store.commit('changeMode', 'preference');
+          store.dispatch('changeMode', 'preference');
           break;
         case 'autoplay':
           if (local.slides) local.slides.autoplay();
@@ -127,7 +127,7 @@ export default defineComponent({
           state.activeFullscreen = !state.activeFullscreen;
           break;
         case 'guide':
-          store.commit('changeMode', 'guide');
+          store.dispatch('changeMode', 'guide');
           break;
       }
     }

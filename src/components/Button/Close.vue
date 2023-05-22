@@ -59,5 +59,8 @@ export default defineComponent({
       --icon-stroke: .75px;
     }
   }
+  @include dark-mode() {
+    background: rgba(34,34,34,.75);
+  }
 }
 </style>

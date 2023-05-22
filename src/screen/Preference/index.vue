@@ -120,7 +120,7 @@ export default defineComponent({
     }
     function onClose()
     {
-      store.commit('changeMode', null);
+      store.dispatch('changeMode', null);
     }
     function onUpdateFields(structure)
     {
@@ -143,11 +143,11 @@ export default defineComponent({
         };
         if (!object.checkPreference(preference)) throw 'Bad preference data.';
         // update store
-        store.commit('updateSlides', slides);
-        store.commit('updatePreference', preference);
-        store.commit('changeMode', null);
-        store.commit('changeActiveSlide', store.state.preference.slides.initialNumber);
-        store.commit('useKeyboardEvent', true);
+        store.dispatch('changeSlides', slides);
+        store.dispatch('changePreference', preference);
+        store.dispatch('changeMode', null);
+        store.dispatch('changeActiveSlide', store.state.preference.slides.initialNumber);
+        store.commit('updateUseKeyboardEvent', true);
         // restart
         local.main.restart();
       }
