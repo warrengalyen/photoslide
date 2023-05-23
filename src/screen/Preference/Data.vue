@@ -4,11 +4,12 @@
     <div class="fields">
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="apiAddress">API Address</label>
+          <label for="apiAddress">
+            {{$t('preference.data.importSlidesData.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          You can input slide data through 'RestAPI' or 'json' file.<br/>
-          As you enter data, it will be replaced with what you entered in the Edit Slides section.
+          {{$t('preference.data.importSlidesData.description')}}
         </p>
         <div class="field-multiple">
           <div class="field-multiple__body">
@@ -27,7 +28,7 @@
               color="key"
               :disabled="localState.apiAddressDisableButton"
               @click="importDataOnAddress">
-              Get data
+              {{$t('preference.data.importSlidesData.label_getData')}}
             </ButtonBasic>
           </div>
         </div>
@@ -41,15 +42,17 @@
             @change="importDataOnFile"/>
         </div>
         <p class="field-description">
-          import slide data by uploading a json file
+          {{$t('preference.data.importSlidesData.desc_file')}}
         </p>
       </div>
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_slides">Edit slide data</label>
+          <label for="pref_slides">
+            {{$t('preference.data.slides.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          get json data through restapi
+          {{$t('preference.data.slides.description')}}
         </p>
         <div class="field-basic__body">
           <FormText
@@ -70,9 +73,9 @@
 
 <script>
 import { defineComponent, reactive, ref, nextTick } from 'vue';
+import { useI18n } from 'vue-i18n';
 import * as object from '~/libs/object';
 import * as string from '~/libs/string';
-import * as util from '~/libs/util';
 import FormText from '~/components/Form/Text';
 import FormUpload from '~/components/Form/Upload';
 import ButtonBasic from '~/components/Button/Basic';
@@ -89,6 +92,7 @@ export default defineComponent({
   },
   setup(props, context)
   {
+    const { t } = useI18n({ useScope: 'global' });
     let localState = reactive({
       apiAddress: 'https://',
       apiAddressDisableButton: false,
@@ -113,7 +117,7 @@ export default defineComponent({
       if (e) e.preventDefault();
       function error()
       {
-        alert('failed to get data.');
+        alert(t('preference.data.alerts.failedGetData'));
         localState.apiAddressDisableButton = false;
         nextTick().then(() => textApiAddress.value.focus());
       }
@@ -159,7 +163,7 @@ export default defineComponent({
     {
       if (!(files && files.length))
       {
-        alert('no file selected');
+        alert(t('preference.data.alerts.noSelectedFile'));
         return;
       }
       const file = files[0];
@@ -174,7 +178,7 @@ export default defineComponent({
         }
         catch(e)
         {
-          alert('file import failed');
+          alert(t('preference.data.alerts.failedGetFile'));
         }
       };
       reader.readAsText(file);

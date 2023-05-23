@@ -3,7 +3,10 @@
     <header class="guide__header">
       <h2>Photoslide guide</h2>
       <p>a guide to slideshows</p>
-      <ButtonClose class="guide__close" @click="onClose"/>
+      <ButtonClose
+        :title="$t('base.close')"
+        class="guide__close"
+        @click="onClose"/>
     </header>
     <section>
       .section

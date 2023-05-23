@@ -1,17 +1,19 @@
 <template>
   <fieldset>
     <legend>Keyboard fields</legend>
-    <div class="fields">
-      <div class="field-switch">
-        <div class="field-switch__body">
-          <h3 class="field-title">
-            <label for="pref_enabled">Enabled shortcut</label>
+    <div className="fields">
+      <div className="field-switch">
+        <div className="field-switch__body">
+          <h3 className="field-title">
+            <label htmlFor="pref_enabled">
+              {{ $t('preference.keyboard.enabled.title') }}
+            </label>
           </h3>
-          <p class="field-description">
-            use keyboard shortcuts
+          <p className="field-description">
+            {{ $t('preference.keyboard.enabled.description') }}
           </p>
         </div>
-        <div class="field-switch__input">
+        <div className="field-switch__input">
           <FormSwitch
             name="pref_enabled"
             id="pref_enabled"
@@ -19,49 +21,79 @@
             @update:modelValue="onSave"/>
         </div>
       </div>
-      <hr class="field-line">
+      <hr className="field-line">
     </div>
 
-    <section class="keyboard-guide">
-      <header class="keyboard-guide__header">
-        <h3>Keyboard guide</h3>
-        <p>As before, pressing the keyboard shortcut activates the corresponding function.</p>
+    <section className="keyboard-guide">
+      <header className="keyboard-guide__header">
+        <h3>
+          {{ $t('preference.keyboard.guide.title') }}
+        </h3>
+        <p>
+          {{ $t('preference.keyboard.guide.description') }}
+        </p>
       </header>
-      <table class="keyboard-guide__body">
+      <table className="keyboard-guide__body">
         <thead>
         <tr>
-          <th>Shortcut key</th>
-          <td>Description</td>
+          <th>
+            {{ $t('preference.keyboard.guide.table.head_key') }}
+          </th>
+          <td>
+            {{ $t('preference.keyboard.guide.table.head_description') }}
+          </td>
         </tr>
         </thead>
         <tbody>
         <tr>
-          <th><code>Left</code></th>
-          <td>go to previous slide</td>
+          <th>
+            <code>
+              {{ $t('preference.keyboard.guide.table.body_leftKey') }}
+            </code>
+          </th>
+          <td>
+            {{ $t('preference.keyboard.guide.table.body_leftDescription') }}
+          </td>
         </tr>
         <tr>
-          <th><code>Right</code></th>
-          <td>go to next slide</td>
+          <th>
+            <code>
+              {{ $t('preference.keyboard.guide.table.body_rightKey') }}
+            </code>
+          </th>
+          <td>
+            {{ $t('preference.keyboard.guide.table.body_rightDescription') }}
+          </td>
         </tr>
         <tr>
           <th><code>A</code></th>
-          <td>auto play</td>
+          <td>
+            {{ $t('preference.keyboard.guide.table.body_autoplayDescription') }}
+          </td>
         </tr>
         <tr>
           <th><code>S</code></th>
-          <td>preferences</td>
+          <td>
+            {{ $t('preference.keyboard.guide.table.body_preferenceDescription') }}
+          </td>
         </tr>
         <tr>
           <th><code>T</code></th>
-          <td>thumbnail image list screen</td>
+          <td>
+            {{ $t('preference.keyboard.guide.table.body_thumbnailDescription') }}
+          </td>
         </tr>
         <tr>
           <th><code>R</code></th>
-          <td>redo slide</td>
+          <td>
+            {{ $t('preference.keyboard.guide.table.body_restartDescription') }}
+          </td>
         </tr>
         <tr>
           <th><code>H</code></th>
-          <td>show all hud elements</td>
+          <td>
+            {{ $t('preference.keyboard.guide.table.body_hudDescription') }}
+          </td>
         </tr>
         </tbody>
       </table>
@@ -70,7 +102,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue';
+import {defineComponent, reactive} from 'vue';
 import * as object from '~/libs/object';
 import FormSwitch from '~/components/Form/Switch';
 
@@ -82,15 +114,13 @@ export default defineComponent({
   props: {
     structure: Object,
   },
-  setup(props, context)
-  {
+  setup(props, context) {
     let state = reactive({
       enabled: props.structure.enabled,
     });
 
     // methods
-    function onSave()
-    {
+    function onSave() {
       const structure = object.convertPureObject(state);
       context.emit('update', structure);
     }

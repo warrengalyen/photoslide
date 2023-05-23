@@ -4,16 +4,18 @@
     <div class="fields">
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_name">Name</label>
+          <label for="pref_name">
+            {{$t('preference.general.name.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          enter a slide title
+          {{$t('preference.general.name.description')}}
         </p>
         <div class="field-basic__body">
           <FormText
             name="pref_name"
             id="pref_name"
-            placeholder="Please input text"
+            :placeholder="$t('base.inputText')"
             :maxlength="30"
             v-model="state.name"
             @update:modelValue="onSave"/>
@@ -21,17 +23,19 @@
       </div>
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_description">Description</label>
+          <label for="pref_description">
+            {{$t('preference.general.description.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          enter a description for the slide
+          {{$t('preference.general.description.description')}}
         </p>
         <div class="field-basic__body">
           <FormText
             type="textarea"
             name="pref_description"
             id="pref_description"
-            placeholder="Please input text"
+            :placeholder="$t('base.inputText')"
             v-model="state.description"
             @update:modelValue="onSave"/>
         </div>
@@ -39,10 +43,12 @@
       <hr class="field-line">
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_language">Language</label>
+          <label for="pref_language">
+            {{$t('preference.general.language.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          set the message language
+          {{$t('preference.general.language.description')}}
         </p>
         <div class="field-basic__body">
           <FormSelect
@@ -50,8 +56,8 @@
             id="pref_language"
             v-model="state.language"
             @update:modelValue="onSave">
-            <option value="en">English</option>
-            <option value="ko">Korean</option>
+            <option value="en">{{$t('preference.general.language.option_en')}}</option>
+            <option value="ko">{{$t('preference.general.language.option_ko')}}</option>
           </FormSelect>
         </div>
       </div>
@@ -59,10 +65,12 @@
       <div class="field-switch">
         <div class="field-switch__body">
           <h3 class="field-title">
-            <label for="pref_hud">Visible HUD</label>
+            <label for="pref_hud">
+              {{$t('preference.general.hud.title')}}
+            </label>
           </h3>
           <p class="field-description">
-            shows operation and state elements
+            {{$t('preference.general.hud.description')}}
           </p>
         </div>
         <div class="field-switch__input">
@@ -76,11 +84,12 @@
       <div class="field-switch">
         <div class="field-switch__body">
           <h3 class="field-title">
-            <label for="pref_hoverVisibleHud">Visible Hover HUD</label>
+            <label for="pref_hoverVisibleHud">
+              {{$t('preference.general.hoverVisibleHud.title')}}
+            </label>
           </h3>
           <p class="field-description">
-            Hide operation and status elements when you move the mouse over the slide area.<br/>
-            If you overlay mouse, HUD will be hidden.
+            {{$t('preference.general.hoverVisibleHud.description')}}
           </p>
         </div>
         <div class="field-switch__input">
@@ -93,10 +102,12 @@
       </div>
       <div class="field-basic">
         <h3 class="field-title">
-          <label for="pref_hudContents">Visible HUD Contents</label>
+          <label for="pref_hudContents">
+            {{$t('preference.general.visibleContents.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          Controls the display of each operation and status elements.
+          {{$t('preference.general.visibleContents.description')}}
         </p>
         <div class="field-basic__body">
           <ul class="field-checks">
@@ -104,36 +115,35 @@
               <FormCheckbox
                 name="pref_hudContents"
                 id="pref_hudContents"
-                label="Menu"
+                :label="$t('preference.general.visibleContents.item_menu')"
                 :modelValue="state.visibleHudContents.menu"
                 @update:modelValue="o => onUpdateHudContents('menu', o)"/>
             </li>
             <li>
               <FormCheckbox
                 name="pref_hudContents"
-                label="Thumbnail"
+                :label="$t('preference.general.visibleContents.item_thumbnail')"
                 :modelValue="state.visibleHudContents.thumbnail"
                 @update:modelValue="o => onUpdateHudContents('thumbnail', o)"/>
             </li>
             <li>
               <FormCheckbox
                 name="pref_hudContents"
-                label="Caption"
+                :label="$t('preference.general.visibleContents.item_caption')"
                 :modelValue="state.visibleHudContents.caption"
                 @update:modelValue="o => onUpdateHudContents('caption', o)"/>
             </li>
             <li>
               <FormCheckbox
                 name="pref_hudContents"
-                label="Controller"
+                :label="$t('preference.general.visibleContents.item_controller')"
                 :modelValue="state.visibleHudContents.controller"
                 @update:modelValue="o => onUpdateHudContents('controller', o)"/>
             </li>
             <li>
               <FormCheckbox
-                name="pref_hudContents_paginate"
-                id="pref_hudContents_paginate"
-                label="Paginate"
+                name="pref_hudContents"
+                :label="$t('preference.general.visibleContents.item_paginate')"
                 :modelValue="state.visibleHudContents.paginate"
                 @update:modelValue="o => onUpdateHudContents('paginate', o)"/>
             </li>
@@ -144,10 +154,12 @@
       <div class="field-switch">
         <div class="field-switch__body">
           <h3 class="field-title">
-            <label for="pref_useStorage">Using browser storage</label>
+            <label for="pref_useStorage">
+              {{$t('preference.general.browserStorage.title')}}
+            </label>
           </h3>
           <p class="field-description">
-            saves slide data and preferences to the browser
+            {{$t('preference.general.browserStorage.description')}}
           </p>
         </div>
         <div class="field-switch__input">
@@ -160,21 +172,23 @@
       </div>
       <div class="field-basic">
         <h3 class="field-title">
-          <label>Backup & Restore</label>
+          <label>
+            {{$t('preference.general.backup.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          all data of the slideshow is imported or exported
+          {{$t('preference.general.backup.description')}}
         </p>
         <div class="field-basic__body">
           <div class="grid import-data">
             <div>
               <ButtonBasic color="key" @click="onClickBackup">
-                Backup
+                {{$t('base.backup')}}
               </ButtonBasic>
             </div>
             <div>
               <ButtonBasic color="key" @click="onClickRestore">
-                Restore
+                {{$t('base.restore')}}
               </ButtonBasic>
             </div>
           </div>
@@ -183,14 +197,16 @@
 
       <div class="field-basic">
         <h3 class="field-title">
-          <label>Reset slideshow</label>
+          <label>
+            {{$t('preference.general.reset.title')}}
+          </label>
         </h3>
         <p class="field-description">
-          reset all settings and slide data
+          {{$t('preference.general.reset.description')}}
         </p>
         <div class="field-basic__body">
           <ButtonBasic color="danger" @click="onClickReset">
-            Reset slideshow
+            {{$t('preference.general.reset.label')}}
           </ButtonBasic>
         </div>
       </div>
@@ -201,6 +217,7 @@
 <script>
 import { defineComponent, reactive } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
 import * as object from '~/libs/object';
 import * as local from '~/libs/local';
 import * as string from '~/libs/string';
@@ -225,6 +242,7 @@ export default defineComponent({
   setup(props, context)
   {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
     let state = reactive({
       name: props.structure.name,
       description: props.structure.description,
@@ -248,7 +266,7 @@ export default defineComponent({
     }
     function onClickBackup()
     {
-      if (!confirm('do you really want to back up all your data\nthe backed up data is saved as a json file')) return;
+      if (!confirm(t('preference.general.confirms.backup'))) return;
       let result = {
         preference: object.convertPureObject(store.state.preference),
         slides: object.convertPureObject(store.state.slides),
@@ -269,7 +287,7 @@ export default defineComponent({
         el.addEventListener('change', e => {
           if (!(e.target.files && e.target.files.length > 0))
           {
-            alert('no file selected');
+            alert(t('preference.general.alerts.noSelectedFile'));
             return;
           }
           const file = e.target.files[0];
@@ -278,19 +296,19 @@ export default defineComponent({
             try
             {
               let json = JSON.parse(String(e.target.result));
-              if (!confirm(`do you really want to restore all your data\nthis action will delete all current data`)) return;
+              if (!confirm(t('preference.general.confirms.restore'))) return;
               if (!(json.preference && json.slides)) throw new Error('no data');
               store.dispatch('changePreference', json.preference);
               store.dispatch('changeSlides', json.slides);
               store.dispatch('changeMode', null);
               store.dispatch('changeActiveSlide', json.preference.slides.initialNumber);
               store.commit('updateUseKeyboardEvent', true);
-              alert('restoration completed');
+              alert(t('preference.general.alerts.completeRestore'));
               local.main.restart();
             }
             catch(e)
             {
-              alert('restore failed');
+              alert(t('preference.general.alerts.failedRestore'));
             }
           };
           reader.readAsText(file);
@@ -300,7 +318,7 @@ export default defineComponent({
     }
     function onClickReset()
     {
-      if (!confirm('Are you sure you want to reset all settings and slide data?\nonce initialized it cannot be recovered')) return;
+      if (!confirm(t('preference.general.confirms.reset'))) return;
       store.dispatch('reset');
       local.main.restart();
     }

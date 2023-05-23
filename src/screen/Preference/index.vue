@@ -11,13 +11,13 @@
           <nav class="preference-header__nav">
             <button
               type="submit"
-              title="Submit"
+              :title="$t('base.apply')"
               @click="onSubmit">
               <Icon icon-name="check"/>
             </button>
             <button
               type="button"
-              title="Close"
+              :title="$t('base.close')"
               @click="onClose">
               <Icon icon-name="x"/>
             </button>
@@ -37,10 +37,12 @@
 <script>
 import { defineComponent, defineAsyncComponent, reactive, computed, onMounted, onUnmounted, watch, ref } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
 import * as object from '~/libs/object';
 import * as local from '~/libs/local';
 import Icon from '~/components/Icon';
 import Side from './Side';
+
 export default defineComponent({
   name: 'preference',
   components: {
@@ -50,6 +52,7 @@ export default defineComponent({
   setup()
   {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
     const preference = object.convertPureObject(store.state.preference);
     const slides = object.convertPureObject(store.state.slides);
     let state = reactive({
@@ -72,7 +75,7 @@ export default defineComponent({
           case 'style':
             return defineAsyncComponent(() => import('./Style'));
           case 'slides':
-            return defineAsyncComponent(() => import('./Slide'));
+            return defineAsyncComponent(() => import('./Slides'));
           case 'data':
             return defineAsyncComponent(() => import('./Data'));
           case 'keyboard':
@@ -85,28 +88,28 @@ export default defineComponent({
           case 'general':
           default:
             return {
-              title: 'General',
-              description: 'set basic items',
+              title: t('preference.header.general.title'),
+              description: t('preference.header.general.description'),
             };
+          case 'slides':
+            return {
+              title: t('preference.header.slides.title'),
+              description: t('preference.header.slides.description'),
+            }
           case 'style':
             return {
-              title: 'Style',
-              description: 'sets the parts displayed on the screen',
+              title: t('preference.header.style.title'),
+              description: t('preference.header.style.description'),
             };
-          case 'slide':
-            return {
-              title: 'Slide',
-              description: 'set the parts related to the slide',
-            }
           case 'data':
             return {
-              title: 'Data',
-              description: 'manage slide data',
+              title: t('preference.header.data.title'),
+              description: t('preference.header.data.description'),
             };
           case 'keyboard':
             return {
-              title: 'Keyboard',
-              description: 'settings related to keyboard shortcuts',
+              title: t('preference.header.keyboard.title'),
+              description: t('preference.header.keyboard.description'),
             };
         }
       }),
@@ -129,7 +132,7 @@ export default defineComponent({
     function onSubmit(e)
     {
       e.preventDefault();
-      if (!confirm('The slideshow will restart\nwould you like to apply?')) return;
+      if (!confirm(t('preference.confirm'))) return;
       try
       {
         // check data
@@ -153,7 +156,7 @@ export default defineComponent({
       }
       catch(e)
       {
-        alert('failed to apply because an error occurred');
+        alert(t('preference.failedApply'));
       }
     }
 
