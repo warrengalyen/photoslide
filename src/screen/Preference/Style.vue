@@ -1,54 +1,72 @@
 <template>
   <fieldset>
     <legend>Style fields</legend>
-    <div className="fields">
-      <div className="field-basic">
-        <h3 className="field-title">
-          <label htmlFor="pref_screenColor">Screen mode</label>
+    <div class="fields">
+      <div class="field-basic">
+        <h3 class="field-title">
+          <label for="pref_screenColor">
+            {{$t('preference.style.screenColor.title')}}
+          </label>
         </h3>
-        <p className="field-description">
-          select a screen mode
+        <p class="field-description">
+          {{$t('preference.style.screenColor.description')}}
         </p>
-        <div className="field-basic__body">
+        <div class="field-basic__body">
           <FormSelect
             name="pref_screenColor"
             id="pref_screenColor"
             v-model="state.screenColor"
             @update:modelValue="onSave">
-            <option value="system">System</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
+            <option value="system">
+              {{$t('preference.style.screenColor.option_system')}}
+            </option>
+            <option value="light">
+              {{$t('preference.style.screenColor.option_light')}}
+            </option>
+            <option value="dark">
+              {{$t('preference.style.screenColor.option_dark')}}
+            </option>
           </FormSelect>
         </div>
       </div>
-      <hr className="field-line">
-      <div className="field-basic">
-        <h3 className="field-title">
-          <label htmlFor="pref_imageType">Image type</label>
+      <hr class="field-line">
+      <div class="field-basic">
+        <h3 class="field-title">
+          <label for="pref_imageType">
+            {{$t('preference.style.imageType.title')}}
+          </label>
         </h3>
-        <p className="field-description">
-          how to display slide images
+        <p class="field-description">
+          {{$t('preference.style.imageType.description')}}
         </p>
-        <div className="field-basic__body">
+        <div class="field-basic__body">
           <FormSelect
             name="pref_imageType"
             id="pref_imageType"
             v-model="state.imageType"
             @update:modelValue="onSave">
-            <option value="none">None</option>
-            <option value="contain">Contain</option>
-            <option value="cover">Cover</option>
+            <option value="none">
+              {{$t('preference.style.imageType.option_none')}}
+            </option>
+            <option value="contain">
+              {{$t('preference.style.imageType.option_contain')}}
+            </option>
+            <option value="cover">
+              {{$t('preference.style.imageType.option_cover')}}
+            </option>
           </FormSelect>
         </div>
       </div>
-      <div className="field-basic">
-        <h3 className="field-title">
-          <label htmlFor="pref_imageScale">Image scale</label>
+      <div class="field-basic">
+        <h3 class="field-title">
+          <label for="pref_imageScale">
+            {{$t('preference.style.imageScale.title')}}
+          </label>
         </h3>
-        <p className="field-description">
-          set the slide image size ex width height
+        <p class="field-description">
+          {{$t('preference.style.imageScale.description')}}
         </p>
-        <div className="field-basic__body">
+        <div class="field-basic__body">
           <FormText
             type="text"
             name="pref_imageScale"
@@ -61,16 +79,18 @@
             @update:modelValue="onUpdateImageScale"/>
         </div>
       </div>
-      <hr className="field-line">
-      <div className="field-basic">
-        <h3 className="field-title">
-          <label htmlFor="pref_captionScale">Caption scale</label>
+      <hr class="field-line">
+      <div class="field-basic">
+        <h3 class="field-title">
+          <label for="pref_captionScale">
+            {{$t('preference.style.captionScale.title')}}
+          </label>
         </h3>
-        <p className="field-description">
-          a value that determines the size of the caption
+        <p class="field-description">
+          {{$t('preference.style.captionScale.description')}}
         </p>
-        <div className="field-basic__inline">
-          <label className="label">
+        <div class="field-basic__inline">
+          <label class="label">
             <FormText
               type="tel"
               name="pref_captionScale"
@@ -86,14 +106,16 @@
           </label>
         </div>
       </div>
-      <div className="field-basic">
-        <h3 className="field-title">
-          <label htmlFor="pref_captionPosition">Caption position</label>
+      <div class="field-basic">
+        <h3 class="field-title">
+          <label for="pref_captionPosition">
+            {{$t('preference.style.captionPosition.title')}}
+          </label>
         </h3>
-        <p className="field-description">
-          position of caption ex left top
+        <p class="field-description">
+          {{$t('preference.style.captionPosition.description')}}
         </p>
-        <div className="field-basic__body">
+        <div class="field-basic__body">
           <FormText
             type="text"
             name="pref_captionPosition"
@@ -111,7 +133,7 @@
 </template>
 
 <script>
-import {defineComponent, reactive} from 'vue';
+import { defineComponent, reactive } from 'vue';
 import * as object from '~/libs/object';
 import FormText from '~/components/Form/Text';
 import FormSelect from '~/components/Form/Select';
@@ -125,7 +147,8 @@ export default defineComponent({
   props: {
     structure: Object,
   },
-  setup(props, context) {
+  setup(props, context)
+  {
     let state = reactive({
       screenColor: props.structure.screenColor,
       imageType: props.structure.imageType,
@@ -135,17 +158,18 @@ export default defineComponent({
     });
 
     // methods
-    function onSave() {
+    function onSave()
+    {
       const structure = object.convertPureObject(state);
       context.emit('update', structure);
     }
-
-    function onUpdateImageScale(s) {
+    function onUpdateImageScale(s)
+    {
       state.imageScale = s.split(',');
       onSave();
     }
-
-    function onUpdateCaptionPosition(s) {
+    function onUpdateCaptionPosition(s)
+    {
       state.captionPosition = s.split(',');
       onSave();
     }
