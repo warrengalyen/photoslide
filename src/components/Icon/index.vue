@@ -56,6 +56,10 @@ export default defineComponent({
             return defineAsyncComponent(() => import('./src/icon-upload'));
           case 'file':
             return defineAsyncComponent(() => import('./src/icon-file'));
+          case 'info':
+            return defineAsyncComponent(() => import('./src/icon-info'));
+          case 'play-circle':
+            return defineAsyncComponent(() => import('./src/icon-play-circle'));
           default:
             return null;
         }

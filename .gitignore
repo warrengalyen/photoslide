@@ -20,3 +20,5 @@ pnpm-debug.log*
 
 # etc
 yarn.lock
+.afphoto
+.sh

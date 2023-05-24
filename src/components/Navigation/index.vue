@@ -12,6 +12,17 @@
       </button>
     </div>
     <div
+      v-if="state.computedVisibleAutoplay"
+      class="slideshow-navigation__item">
+      <button
+        type="button"
+        :title="$t('navigation.autoplay')"
+        :class="$store.state.preference.slides.autoplay ? 'on' : ''"
+        @click="onClickAutoplayButton">
+        <Icon icon-name="play-circle"/>
+      </button>
+    </div>
+    <div
       v-if="$store.state.preference.general.visibleHudContents.menu"
       class="slideshow-navigation__item">
       <button
@@ -34,28 +45,12 @@
               {{$t('navigation.preference')}}
             </button>
           </li>
-          <li v-if="$store.state.slides.length > 0">
-            <button
-              type="button"
-              :class="[ $store.state.preference.slides.autoplay && 'on' ]"
-              @click="onClickContextItem('autoplay')">
-              {{$t('navigation.autoplay')}}
-            </button>
-          </li>
           <li>
             <button
               type="button"
               :class="[ state.activeFullscreen && 'on' ]"
               @click="onClickContextItem('fullscreen')">
               {{$t('navigation.fullscreen')}}
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              :class="[ state.activeFullscreen && 'on' ]"
-              @click="onClickContextItem('guide')">
-              {{$t('navigation.guide')}}
             </button>
           </li>
         </ul>
@@ -85,6 +80,10 @@ export default defineComponent({
         if (!store.state.preference.general.visibleHudContents.thumbnail) return false;
         return store.state.slides && store.state.slides.length > 0;
       }),
+      computedVisibleAutoplay: computed(() => {
+        if (!store.state.preference.general.visibleHudContents.autoplay) return false;
+        return store.state.slides && store.state.slides.length > 0;
+      }),
       computedActiveThumbnail: computed(() => {
         return store.state.mode === 'thumbnail';
       }),
@@ -93,6 +92,10 @@ export default defineComponent({
     function onClickThumbnailButton(sw)
     {
       store.dispatch('changeMode', sw ? 'thumbnail' : null);
+    }
+    function onClickAutoplayButton()
+    {
+      if (local.slides) local.slides.autoplay();
     }
     function onClickMenuButton(e)
     {
@@ -119,15 +122,9 @@ export default defineComponent({
         case 'preference':
           store.dispatch('changeMode', 'preference');
           break;
-        case 'autoplay':
-          if (local.slides) local.slides.autoplay();
-          break;
         case 'fullscreen':
           util.fullscreen(!state.activeFullscreen);
           state.activeFullscreen = !state.activeFullscreen;
-          break;
-        case 'guide':
-          store.dispatch('changeMode', 'guide');
           break;
       }
     }
@@ -145,6 +142,7 @@ export default defineComponent({
     return {
       state,
       onClickThumbnailButton,
+      onClickAutoplayButton,
       onClickMenuButton,
       onClickContextItem,
     };
