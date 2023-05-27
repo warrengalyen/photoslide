@@ -7,11 +7,12 @@
 import { defineComponent, reactive, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
-import * as util from '~/libs/util';
 import * as storage from '~/libs/storage';
+import { convertPureObject } from '~/libs/object';
+import { exampleSlides } from '~/store/resource';
+import { sleep } from '~/libs/util';
 import Container from '~/screen/Container';
 import LoadingIntro from '~/components/Loading/Intro';
-import { convertPureObject } from "@/libs/object";
 
 export default defineComponent({
   name: 'App',
@@ -47,7 +48,7 @@ export default defineComponent({
     }
     function start()
     {
-      util.sleep(50).then(() => {
+      sleep(50).then(() => {
         state.loading = false;
       });
     }
@@ -60,7 +61,7 @@ export default defineComponent({
       stop();
       updateTheme(store.state.preference.style.screenColor);
       locale.value = store.state.preference.general.language;
-      util.sleep(1000).then(() => start());
+      sleep(1000).then(() => start());
     }
 
     // lifecycles
@@ -71,14 +72,18 @@ export default defineComponent({
     const storageSlides = storage.get('slides');
     if (storagePreference && storageSlides)
     {
+      // recover with storage contents
       store.dispatch('changePreference', storagePreference);
       store.dispatch('changeSlides', storageSlides);
       store.dispatch('changeActiveSlide', storagePreference.slides.initialNumber);
     }
     else
     {
+      // Recover to the example slides and save the data to storage.
       storage.set('preference', convertPureObject(store.state.preference));
-      storage.set('slides', convertPureObject(store.state.slides));
+      const slides = convertPureObject(exampleSlides);
+      store.dispatch('changeSlides', slides);
+      storage.set('slides', slides);
     }
 
     // actions
