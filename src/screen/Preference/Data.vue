@@ -94,7 +94,7 @@ export default defineComponent({
   {
     const { t } = useI18n({ useScope: 'global' });
     let localState = reactive({
-      apiAddress: 'https://',
+      apiAddress: 'https://raw.githubusercontent.com/warrengalyen/photoslide/main/src/example.json',
       apiAddressDisableButton: false,
       slidesColor: undefined,
     });
@@ -138,6 +138,7 @@ export default defineComponent({
               JSON.parse(httpRequest.responseText);
               state.slides = httpRequest.responseText;
               checkSlideSource();
+              onSave();
               localState.apiAddressDisableButton = false;
               textSlides.value.focus();
             }
