@@ -2,6 +2,7 @@
 
 .slideshow-slides {
   &__paginate {
+    user-select: none;
     position: fixed;
     z-index: 2;
     right: 16px;
