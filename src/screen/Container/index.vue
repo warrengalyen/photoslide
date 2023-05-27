@@ -97,14 +97,19 @@ export default defineComponent({
             local.slides.autoplay(!store.state.preference.slides.autoplay);
             break;
           case 83: // s
-            store.dispatch('changeMode', 'preference');
+            if (store.state.preference.general.visibleHudContents.thumbnail)
+            {
+              store.dispatch('changeMode', 'thumbnail');
+            }
             break;
           case 84: // t
             store.dispatch('changeMode', 'thumbnail');
             break;
           case 82: // r
-            if (!confirm(t('main.confirmRestart'))) return;
-            local.main.restart();
+            if (confirm(t('main.confirmRestart')))
+            {
+              local.main.restart();
+            }
             break;
           case 72: // h
             store.dispatch('changeHud');
