@@ -44,7 +44,8 @@ export default defineComponent({
 .loading-intro {
   --loading-size: 50px;
   --loading-speed: 500ms;
-  height: 100vh;
+  width: 100vw;
+  @include full-height();
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -70,7 +71,6 @@ export default defineComponent({
     strong {
       margin: 48px 0 0;
       font-size: 24px;
-      font-weight: 200;
     }
     &--move {
       .unit {

@@ -1,7 +1,8 @@
 <template>
   <nav
     class="slideshow-navigation"
-    @touchstart="onTouchStart">
+    @touchstart="onTouchStart"
+    @click="onClickWrapper">
     <div
       v-if="state.computedVisibleThumbnail"
       class="slideshow-navigation__item">
@@ -79,8 +80,7 @@ export default defineComponent({
       activeMenu: false,
       activeFullscreen: false,
       computedVisibleThumbnail: computed(() => {
-        if (!store.state.preference.general.visibleHudContents.thumbnail) return false;
-        return store.state.slides && store.state.slides.length > 0;
+        return store.state.preference.general.visibleHudContents.thumbnail;
       }),
       computedVisibleAutoplay: computed(() => {
         if (!store.state.preference.general.visibleHudContents.autoplay) return false;
@@ -134,6 +134,10 @@ export default defineComponent({
     {
       if (e.touches && e.touches.length > 1) e.preventDefault();
     }
+    function onClickWrapper(e)
+    {
+      e.stopPropagation();
+    }
 
     // lifecycles
     onMounted(() => {
@@ -152,6 +156,7 @@ export default defineComponent({
       onClickMenuButton,
       onClickContextItem,
       onTouchStart,
+      onClickWrapper,
     };
   },
 });
