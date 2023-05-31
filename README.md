@@ -1,6 +1,6 @@
 # Photoslide
 
-![PHOTOSLIDE](resources/github/logo.png)
+![PHOTOSLIDE](resources/github/app-icon.png)
 
 The purpose of this app is to flip through photos one by one in the browser full screen.
 
