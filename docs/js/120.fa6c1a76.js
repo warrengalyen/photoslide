@@ -1,1 +1,0 @@
-"use strict";(self["webpackChunkphotoslide"]=self["webpackChunkphotoslide"]||[]).push([[120],{120:function(n,e,t){t.r(e),t.d(e,{default:function(){return l}});var o=t(252);const r={points:"20 6 9 17 4 12"};function s(n,e){return(0,o.wg)(),(0,o.iD)("polyline",r)}var u=t(744);const i={},c=(0,u.Z)(i,[["render",s]]);var l=c}}]);

@@ -110,6 +110,42 @@ yarn run electron-dev
 yarn run electron-build
 ```
 
+### Using component
+
+To use a slideshow in another project, you can directly add the component using `npm`.
+
+```shell
+yarn add @mechanika/slideshow
+```
+
+and refer to the [main.js](https://github.com/warrengalyen/photoslide/blob/master/src/main.js) file in the project  
+source for the necessary elements to configure the slideshow. 
+It is recommended to refer to the [main.scss](https://github.com/warrengalyen/photoslide/blob/master/src/scss/main.scss) 
+file and load it into your project to use the base css for the interface.
+
+finally add the component like this
+
+```vue
+<template>
+  <Photoslide
+    preference="{}"
+    slides="[]"/>
+</template>
+<script>
+import { defineComponent } from 'vue';
+import Photoslide from '@mechanika/slideshow';
+export default defineComponent({
+  components: {
+    Photoslide,
+  },
+});
+</script>
+```
+
+Here is a slideshow property guide.
+
+- preferences: [Preferences](https://github.com/warrengalyen/photoslide/blob/master/src/store/defaults.js) reference
+
 ## thanks
 
 - vue3: https://v3.vuejs.org

@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunk_mechanika_photoslide"]=self["webpackChunk_mechanika_photoslide"]||[]).push([[819],{819:function(n,e,t){t.r(e),t.d(e,{default:function(){return s}});var a=t(252);const r={d:"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"};function c(n,e){return(0,a.wg)(),(0,a.iD)("path",r)}var u=t(744);const i={},o=(0,u.Z)(i,[["render",c]]);var s=o}}]);

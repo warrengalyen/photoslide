@@ -1,5 +1,5 @@
 {
-  "name": "photoslide",
+  "name": "@mechanika/photoslide",
   "version": "1.0.1",
   "main": "src/screen/App.vue",
   "repository": "https://github.com/warrengalyen/photoslide.git",
@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve --host 0.0.0.0 --port 3000",
+    "dev-external": "vue-cli-service serve --host 0.0.0.0 --port 3000 src/external/main.js",
     "build": "rm -rf docs && vue-cli-service build --mode production --no-module",
     "version-patch": "npm version patch"
   },
