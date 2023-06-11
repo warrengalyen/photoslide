@@ -1,1 +1,0 @@
-"use strict";(self["webpackChunkphotoslide"]=self["webpackChunkphotoslide"]||[]).push([[819],{819:function(n,t,e){e.r(t),e.d(t,{default:function(){return i}});var r=e(252);const u={d:"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"};function o(n,t){return(0,r.wg)(),(0,r.iD)("path",u)}var s=e(744);const a={},c=(0,s.Z)(a,[["render",o]]);var i=c}}]);
