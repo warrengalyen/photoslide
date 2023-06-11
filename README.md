@@ -133,7 +133,7 @@ finally add the component like this
 </template>
 <script>
 import { defineComponent } from 'vue';
-import Photoslide from '@mechanika/slideshow';
+import Photoslide from 'photoslide';
 export default defineComponent({
   components: {
     Photoslide,
