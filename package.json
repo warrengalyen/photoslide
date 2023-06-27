@@ -1,6 +1,6 @@
 {
   "name": "photoslide",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "src/screen/App.vue",
   "repository": "https://github.com/warrengalyen/photoslide.git",
   "author": "Warren Galyen",
