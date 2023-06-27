@@ -36,6 +36,9 @@ export default {
       captionScale: 100, // %
       captionPosition: ['32px','30px'], // [ left, top ]
     },
+    data: {
+      // TODO: some structure.
+    },
     keyboard: {
       enabled: true,
     },
@@ -47,7 +50,11 @@ export default {
     keyboard: true,
     information: true,
   },
+  tree: {
+    default: [],
+  },
   slides: [],
+  category: 'default',
   mode: null,
   activeSlide: undefined,
   keyboardEvent: true,
