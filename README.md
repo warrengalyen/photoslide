@@ -70,7 +70,7 @@ Before building the development environment, clone the repository and install de
 
 ```shell
 git clone https://github.com/warrengalyen/photoslide.git
-photoslide
+cd photoslide
 yarn install
 ```
 
