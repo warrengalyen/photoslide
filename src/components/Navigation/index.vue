@@ -90,7 +90,7 @@ export default defineComponent({
         return store.state.mode === 'thumbnail';
       }),
     });
-    // methods
+    // private methods
     function onClickThumbnailButton(sw)
     {
       store.dispatch('changeMode', sw ? 'thumbnail' : null);
@@ -101,7 +101,7 @@ export default defineComponent({
     }
     function onClickMenuButton(e)
     {
-      e.stopPropagation();
+      if (e) e.stopPropagation();
       if (state.activeMenu)
       {
         switchActiveMenu(false);
@@ -119,6 +119,7 @@ export default defineComponent({
     }
     function onClickContextItem(key)
     {
+      switchActiveMenu(false);
       switch (key)
       {
         case 'preference':
@@ -139,6 +140,12 @@ export default defineComponent({
       e.stopPropagation();
     }
 
+    // public methods
+    function blur()
+    {
+      switchActiveMenu(false);
+    }
+
     // lifecycles
     onMounted(() => {
       document.on('fullscreenchange.slideshow', () => {
@@ -157,6 +164,7 @@ export default defineComponent({
       onClickContextItem,
       onTouchStart,
       onClickWrapper,
+      blur,
     };
   },
 });
