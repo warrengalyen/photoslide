@@ -70,7 +70,7 @@ Before building the development environment, clone the repository and install de
 
 ```shell
 git clone https://github.com/warrengalyen/photoslide.git
-cd slideshow
+photoslide
 yarn install
 ```
 
@@ -115,7 +115,7 @@ yarn run electron-build
 To use a slideshow in another project, you can directly add the component using `npm`.
 
 ```shell
-yarn add @mechanika/slideshow
+yarn add @mechanika/photoslide
 ```
 
 You can develop by adding dependencies and referring to the contents and sources of the 

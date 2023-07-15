@@ -5,6 +5,7 @@ import defaults from '~/store/defaults';
 let state = convertPureObject(defaults);
 
 // TODO: temporary adjustment for testing
-state.usePreference.data = false;
+// state.usePreference.data = false;
+// state.mode = 'preference';
 
 export default state;
