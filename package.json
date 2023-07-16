@@ -1,7 +1,7 @@
 {
   "name": "photoslide",
   "productName": "Photoslide",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "src/screen/App.vue",
   "repository": "https://github.com/warrengalyen/photoslide.git",
   "author": "Warren Galyen",
