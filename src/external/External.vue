@@ -17,7 +17,7 @@ export default defineComponent({
   {
     let state = reactive({
       tree: {
-        default: 'https://raw.githubusercontent.com/redgoose-dev/slideshow/main/resource/example/slides.json',
+        default: 'https://raw.githubusercontent.com/warrengalyen/photoslide/master/resource/example/slides.json',
         foo: [
           {
             src: 'https://images.unsplash.com/photo-1617634667039-8e4cb277ab46?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1217&q=70',

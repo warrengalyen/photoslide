@@ -22,7 +22,7 @@ module.exports = {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = pkg.productName || 'Slideshow';
+        args[0].title = pkg.productName || 'Photoslide';
         return args;
       });
   },
