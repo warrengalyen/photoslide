@@ -1,7 +1,7 @@
 export default {
   preference: {
     general: {
-      name: 'Photoslide',
+      name: 'Slideshow',
       description: 'The slideshow description.',
       language: 'en', // en,ko
       hud: true,

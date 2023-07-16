@@ -1,17 +1,17 @@
 <template>
   <div class="external-body">
-    <Photoslide
+    <Slideshow
       :tree="state.tree"/>
   </div>
 </template>
 
 <script>
 import { defineComponent, reactive, ref } from 'vue';
-import Photoslide from '~/screen/App';
+import Slideshow from '~/screen/App';
 export default defineComponent({
   name: 'external-component',
   components: {
-    Photoslide,
+    Slideshow,
   },
   setup()
   {
