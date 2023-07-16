@@ -37,7 +37,10 @@ fieldset {
     line-height: 1.15;
   }
   &__body {
-    margin: 8px 0 0;
+    margin: 10px 0 0;
+    & + .field-basic__body {
+      margin-top: 20px;
+    }
   }
   &__inline {
     margin: 10px 0 0;
@@ -66,6 +69,11 @@ fieldset {
     display: grid;
     grid-template-columns: repeat(var(--column, 1), 1fr);
     gap: var(--gap, 0);
+  }
+  > * {
+    &:first-child {
+      margin-top: 0;
+    }
   }
 }
 .field-check {
